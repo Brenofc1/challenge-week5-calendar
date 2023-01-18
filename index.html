@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Get current hour
+      var currentHour = new Date().getHours();
+
+      // Loop through all table cells
+      $("td").each(function() {
+        var hour = $(this).attr("id");
+        
+        // Check if hour is in the past, present, or future
+        if (hour < currentHour) {
+          $(this).addClass("past");
+        } else if (hour == currentHour) {
+          $(this).addClass("present");
+        } else {
+          $(this).addClass("future");
+        }
+
+        // Get event from local storage
+        var event = localStorage.getItem(hour);
+
+        // Update input field with event
+        $(this).find("input").val(event);
+      });
+
+      // Add event listener to input fields
+      $("input").on("change", function() {
+        // Get hour and event
+        var hour = $(this).parent().attr("id");
+        var event = $(this).val();
+
+        // Save event in local storage
+        localStorage.setItem(hour, event);
+      });
+    });
+  </script>
+  <style>
+    /* CSS for past, present, and future hours */
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <td id="0">0:00</td>
+      <td id="1">1:00</td>
+      <td id="2">2:00</td>
+      <!-- more hours -->
+    </tr>
+    <tr>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <td><input type="text"></td>
+      <!-- more input fields -->
+    </tr>
+  </table>
+</body>
+</html>
