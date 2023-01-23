@@ -66,8 +66,14 @@ $(function () {
     });
     //
     // TODO: Add code to display the current date in the header of the page.
-    var time = dayjs().format('MMM D, YYYY, hh:mm:ss');
-    $('#currentDay').text(time);
+    
+var day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+const d = new Date();
+let day = weekday[d.getDay()];
+document.getElementById("currentDay").innerHTML = day;
+
+
 
   
 
